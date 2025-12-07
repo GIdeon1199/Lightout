@@ -4,7 +4,9 @@ const GameState = {
     currentSceneId: null,
     foundFragments: {},
     branchChoice: null,
-    viewer: null
+    viewer: null,
+    flashlight: { x: 0, y: 0 },
+    lastTouch: null
 };
 
 // --- AUDIO MANAGER ---
@@ -37,13 +39,48 @@ AudioManager.init();
 
 window.addEventListener('load', () => {
     // 1. Setup Flashlight tracking
-    document.addEventListener("mousemove", updateFlashlight);
-    document.addEventListener("touchmove", (e) => {
-        // Prevent default scrolling when touching the game area
-        // e.preventDefault(); 
-        const touch = e.touches[0];
-        updateFlashlight(touch);
+    // Initialize to center
+    GameState.flashlight = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    updateFlashlightDOM(GameState.flashlight.x, GameState.flashlight.y);
+
+    // Mouse (Desktop) - Absolute position
+    document.addEventListener("mousemove", (e) => {
+        GameState.flashlight.x = e.clientX;
+        GameState.flashlight.y = e.clientY;
+        updateFlashlightDOM(e.clientX, e.clientY);
+    });
+
+    // Touch (Mobile) - Relative movement (Trackpad style)
+    document.addEventListener("touchstart", (e) => {
+        const t = e.touches[0];
+        GameState.lastTouch = { x: t.clientX, y: t.clientY };
     }, { passive: false });
+
+    document.addEventListener("touchmove", (e) => {
+        e.preventDefault(); // Prevent scrolling
+        if (!GameState.lastTouch) return;
+
+        const t = e.touches[0];
+        const dx = t.clientX - GameState.lastTouch.x;
+        const dy = t.clientY - GameState.lastTouch.y;
+
+        // Apply delta to flashlight position
+        GameState.flashlight.x += dx;
+        GameState.flashlight.y += dy;
+
+        // Clamp to screen bounds
+        GameState.flashlight.x = Math.max(0, Math.min(window.innerWidth, GameState.flashlight.x));
+        GameState.flashlight.y = Math.max(0, Math.min(window.innerHeight, GameState.flashlight.y));
+
+        updateFlashlightDOM(GameState.flashlight.x, GameState.flashlight.y);
+
+        // Update last touch position
+        GameState.lastTouch = { x: t.clientX, y: t.clientY };
+    }, { passive: false });
+
+    document.addEventListener("touchend", () => {
+        GameState.lastTouch = null;
+    });
 
     // 2. Button Listeners
     document.getElementById("venture-btn").addEventListener("click", onVentureClicked);
@@ -99,12 +136,10 @@ function initViewer() {
     });
 }
 
-function updateFlashlight(e) {
-    const x = e.clientX;
-    const y = e.clientY;
+function updateFlashlightDOM(x, y) {
     const mask = document.getElementById("flashlight-mask");
 
-    // Updates gradient position to mouse coordinates
+    // Updates gradient position
     mask.style.background = `radial-gradient(circle 200px at ${x}px ${y}px, transparent 10%, rgba(0, 0, 0, 0.98) 40%, black 100%)`;
 }
 
