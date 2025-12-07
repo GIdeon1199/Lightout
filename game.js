@@ -92,7 +92,7 @@ function onVentureClicked() {
 function initViewer() {
     GameState.viewer = pannellum.viewer("pano", {
         type: "equirectangular",
-        panorama: "scenes/wheatley_classroom.jpg",
+        panorama: "wheatley_classroom.jpg",
         autoLoad: true,
         showControls: false, // Must be false to hide default UI
         yaw: 0, pitch: 0, hfov: 100, compass: false
