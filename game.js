@@ -50,38 +50,6 @@ window.addEventListener('load', () => {
         updateFlashlightDOM(e.clientX, e.clientY);
     });
 
-    // Touch (Mobile) - Relative movement (Trackpad style)
-    document.addEventListener("touchstart", (e) => {
-        const t = e.touches[0];
-        GameState.lastTouch = { x: t.clientX, y: t.clientY };
-    }, { passive: false });
-
-    document.addEventListener("touchmove", (e) => {
-        e.preventDefault(); // Prevent scrolling
-        if (!GameState.lastTouch) return;
-
-        const t = e.touches[0];
-        const dx = t.clientX - GameState.lastTouch.x;
-        const dy = t.clientY - GameState.lastTouch.y;
-
-        // Apply delta to flashlight position
-        GameState.flashlight.x += dx;
-        GameState.flashlight.y += dy;
-
-        // Clamp to screen bounds
-        GameState.flashlight.x = Math.max(0, Math.min(window.innerWidth, GameState.flashlight.x));
-        GameState.flashlight.y = Math.max(0, Math.min(window.innerHeight, GameState.flashlight.y));
-
-        updateFlashlightDOM(GameState.flashlight.x, GameState.flashlight.y);
-
-        // Update last touch position
-        GameState.lastTouch = { x: t.clientX, y: t.clientY };
-    }, { passive: false });
-
-    document.addEventListener("touchend", () => {
-        GameState.lastTouch = null;
-    });
-
     // 2. Button Listeners
     document.getElementById("venture-btn").addEventListener("click", onVentureClicked);
     document.getElementById("open-code-panel").addEventListener("click", openCodeModal);
@@ -140,7 +108,7 @@ function updateFlashlightDOM(x, y) {
     const mask = document.getElementById("flashlight-mask");
 
     // Updates gradient position
-    mask.style.background = `radial-gradient(circle 200px at ${x}px ${y}px, transparent 10%, rgba(0, 0, 0, 0.98) 40%, black 100%)`;
+    mask.style.background = `radial-gradient(circle 250px at ${x}px ${y}px, transparent 10%, rgba(0, 0, 0, 0.98) 40%, black 100%)`;
 }
 
 
