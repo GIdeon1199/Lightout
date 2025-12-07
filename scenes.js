@@ -4,7 +4,7 @@ const SCENES = {
     wheatley_classroom: {
         id: "wheatley_classroom",
         name: "Wheatley Classroom",
-        image: "scenes/wheatley_classroom.jpg",
+        image: "wheatley_classroom.jpg",
         description: "You wake up in a dark Wheatley classroom. Its pitch black.",
         totalFragments: 3,
         fragments: [
@@ -23,7 +23,7 @@ const SCENES = {
     wheatley_atrium: {
         id: "wheatley_atrium",
         name: "Wheatley Atrium",
-        image: "scenes/wheatley_atrium.jpg",
+        image: "wheatley_atrium.jpg",
         description: "lets help the others find the code. no one one seems to know what happened.",
         totalFragments: 4,
         fragments: [
@@ -44,7 +44,7 @@ const SCENES = {
     scaife: {
         id: "scaife",
         name: "Scaife Hall",
-        image: "scenes/scaife_hall.jpg",
+        image: "scaife_hall.jpg",
         description: "The hallway stretches infinitely in the dark.",
         totalFragments: 4,
         fragments: [
@@ -65,7 +65,7 @@ const SCENES = {
     johnjay_inside: {
         id: "johnjay_inside",
         name: "John Jay Center ",
-        image: "scenes/john_jay_inside.jpg",
+        image: "john_jay_inside.jpg",
         description: "Not a single soul in sight. I must get out of here!",
         totalFragments: 5,
         fragments: [
@@ -88,7 +88,7 @@ const SCENES = {
     johnjay_outside: {
         id: "johnjay_outside",
         name: "John Jay Center (Outside)",
-        image: "scenes/john_jay_outside.jpg",
+        image: "john_jay_outside.jpg",
         description: "The sun is setting but its really cold. The path splits here.",
         totalFragments: 5,
         fragments: [
@@ -116,7 +116,7 @@ const SCENES = {
     hale_cafe: {
         id: "hale_cafe",
         name: "Hale Café",
-        image: "scenes/hale_cafe.jpg", // Optional scene
+        image: "hale_cafe.jpg", // Optional scene
         description: "I am glad I came here. Someone left notes on how to get out of here.",
         totalFragments: 6,
         fragments: [
@@ -141,7 +141,7 @@ const SCENES = {
     nicholson_rotunda: {
         id: "nicholson_rotunda",
         name: "Nicholson Rotunda",
-        image: "scenes/nicholson_rotunda.jpg",
+        image: "nicholson_rotunda.jpg",
         description: "The heart of the campus. Almost there.",
         totalFragments: 6,
         fragments: [
@@ -166,7 +166,7 @@ const SCENES = {
     library: {
         id: "library",
         name: "The Library",
-        image: "scenes/library.jpg",
+        image: "library.jpg",
         description: "The final door.",
         totalFragments: 7,
         fragments: [
