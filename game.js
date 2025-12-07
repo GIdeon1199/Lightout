@@ -108,7 +108,7 @@ function updateFlashlightDOM(x, y) {
     const mask = document.getElementById("flashlight-mask");
 
     // Updates gradient position
-    mask.style.background = `radial-gradient(circle 250px at ${x}px ${y}px, transparent 10%, rgba(0, 0, 0, 0.98) 40%, black 100%)`;
+    mask.style.background = `radial-gradient(circle 300px at ${x}px ${y}px, transparent 10%, rgba(0, 0, 0, 0.98) 40%, black 100%)`;
 }
 
 
@@ -180,7 +180,7 @@ function refreshViewerHotspots(sceneData) {
                 yaw: hs.yaw,
                 cssClass: "fragment-hotspot",
                 createTooltipFunc: (hotSpotDiv) => {
-                    hotSpotDiv.innerHTML = `<img src="no${fragment.value}.png" style="width: 25px; height: auto; display: block;">`;
+                    hotSpotDiv.innerHTML = `<img src="no${fragment.value}.png" style="width: 50px; height: auto; display: block;">`;
                 },
                 clickHandlerFunc: (evt) => onFragmentFound(hs.fragmentId, evt)
             });
