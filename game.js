@@ -177,7 +177,7 @@ function refreshViewerHotspots(sceneData) {
                 yaw: hs.yaw,
                 cssClass: "fragment-hotspot",
                 createTooltipFunc: (hotSpotDiv) => {
-                    hotSpotDiv.innerHTML = `<img src="codes/no${fragment.value}.png" style="width: 25px; height: auto; display: block;">`;
+                    hotSpotDiv.innerHTML = `<img src="no${fragment.value}.png" style="width: 25px; height: auto; display: block;">`;
                 },
                 clickHandlerFunc: (evt) => onFragmentFound(hs.fragmentId, evt)
             });
@@ -285,7 +285,7 @@ function renderCodeButtons() {
     sceneData.fragments.forEach(frag => {
         const btn = document.createElement("button");
         btn.className = "frag-btn";
-        btn.innerHTML = `<img src="codes/no${frag.value}.png" />`;
+        btn.innerHTML = `<img src="no${frag.value}.png" />`;
         btn.onclick = () => {
             AudioManager.playClick(); // SFX
             const emptyIndex = currentInput.findIndex(val => val === "");
@@ -430,6 +430,6 @@ function showEndGame() {
 function showIntelModal(message, value) {
     const modal = document.getElementById("intel-modal");
     document.getElementById("intel-message").innerHTML = message;
-    document.getElementById("intel-image-container").innerHTML = `<img src="codes/no${value}.png" style="width: 100px; height: auto; filter: drop-shadow(0 0 10px var(--success));">`;
+    document.getElementById("intel-image-container").innerHTML = `<img src="no${value}.png" style="width: 100px; height: auto; filter: drop-shadow(0 0 10px var(--success));">`;
     modal.classList.remove("hidden");
 }
