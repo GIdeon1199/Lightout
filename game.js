@@ -9,9 +9,9 @@ const GameState = {
 
 // --- AUDIO MANAGER ---
 const AudioManager = {
-    ambient: new Audio("assets/audio/ambient_horror.mp3"),
-    typing: new Audio("assets/audio/typing.mp3"),
-    click: new Audio("assets/audio/click.mp3"),
+    ambient: new Audio("ambient_horror.mp3"),
+    typing: new Audio("typing.mp3"),
+    click: new Audio("click.mp3"),
     init: function () {
         this.ambient.loop = true;
         this.ambient.volume = 0.3;
