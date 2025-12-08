@@ -180,7 +180,7 @@ function refreshViewerHotspots(sceneData) {
                 yaw: hs.yaw,
                 cssClass: "fragment-hotspot",
                 createTooltipFunc: (hotSpotDiv) => {
-                    hotSpotDiv.innerHTML = `<img src="no${fragment.value}.png" style="width: 50px; height: auto; display: block;">`;
+                    hotSpotDiv.innerHTML = `<img src="no${fragment.value}.png" style="width: 60px; height: auto; display: block;">`;
                 },
                 clickHandlerFunc: (evt) => onFragmentFound(hs.fragmentId, evt)
             });
