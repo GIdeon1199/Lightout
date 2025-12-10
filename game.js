@@ -139,6 +139,8 @@ function loadScene(sceneId) {
                 overlay.style.opacity = "0";
                 setTimeout(() => {
                     overlay.classList.add("hidden");
+                    // TRIGGER TUTORIAL HERE if needed
+                    checkTutorials(sceneId);
                 }, 1000);
             }, 2000);
         });
@@ -180,7 +182,7 @@ function refreshViewerHotspots(sceneData) {
                 yaw: hs.yaw,
                 cssClass: "fragment-hotspot",
                 createTooltipFunc: (hotSpotDiv) => {
-                    hotSpotDiv.innerHTML = `<img src="no${fragment.value}.png" style="width: 60px; height: auto; display: block;">`;
+                    hotSpotDiv.innerHTML = `<img src="no${fragment.value}.png" style="width: 50px; height: auto; display: block;">`;
                 },
                 clickHandlerFunc: (evt) => onFragmentFound(hs.fragmentId, evt)
             });
@@ -435,4 +437,60 @@ function showIntelModal(message, value) {
     document.getElementById("intel-message").innerHTML = message;
     document.getElementById("intel-image-container").innerHTML = `<img src="no${value}.png" style="width: 100px; height: auto; filter: drop-shadow(0 0 10px var(--success));">`;
     modal.classList.remove("hidden");
+}
+
+// --- TUTORIAL SYSTEM ---
+let tutorialQueue = [];
+
+function checkTutorials(sceneId) {
+    if (sceneId === "wheatley_classroom") {
+        // Define tutorial steps
+        const steps = [
+            {
+                text: "Use your FLASHLIGHT (cursor/touch) to explore the darkness.",
+                image: null
+            },
+            {
+                text: "Find HIDDEN FRAGMENTS like this one. You need them to find the code and ESCAPE.",
+                image: "no7.png" // Using the image of the first fragment for reference
+            }
+        ];
+        startTutorial(steps);
+    }
+}
+
+function startTutorial(steps) {
+    tutorialQueue = steps;
+    showNextTutorial();
+}
+
+function showNextTutorial() {
+    if (tutorialQueue.length === 0) {
+        document.getElementById("tutorial-modal").classList.add("hidden");
+        return;
+    }
+
+    const step = tutorialQueue.shift();
+    const modal = document.getElementById("tutorial-modal");
+    const textEl = document.getElementById("tutorial-text");
+    const contentEl = document.getElementById("tutorial-content");
+    const nextBtn = document.getElementById("tutorial-next-btn");
+
+    textEl.innerText = step.text;
+    contentEl.innerHTML = "";
+
+    if (step.image) {
+        contentEl.innerHTML = `<img src="${step.image}" style="width: 80px; height: auto; display: block; margin: 10px auto; border: 2px solid var(--secondary);">`;
+    }
+
+    modal.classList.remove("hidden");
+
+    // Remove old listeners to avoid duplicates
+    const newBtn = nextBtn.cloneNode(true);
+    nextBtn.parentNode.replaceChild(newBtn, nextBtn);
+
+    newBtn.addEventListener("click", () => {
+        AudioManager.playClick();
+        showNextTutorial();
+    });
 }
